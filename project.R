@@ -31,3 +31,21 @@ replace_teams <- function(matches) {
 
 #Activate function replace_teams
 matches <- replace_teams(matches)
+
+
+team_name <- list()
+index <- 0
+
+for (i in 1:nrow(matches)) {
+  name <- matches[i, "home_team"]
+  if (!(name %in% names(team_name))) {
+    team_name[[name]] <- index
+    index <- index + 1
+  }
+  
+  name <- matches[i, "away_team"]
+  if (!(name %in% names(team_name))) {
+    team_name[[name]] <- index
+    index <- index + 1
+  }
+}
