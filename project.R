@@ -28,3 +28,6 @@ replace_teams <- function(matches) {
   
   return(matches)
 }
+
+#Activate function replace_teams
+matches <- replace_teams(matches)
