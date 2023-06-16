@@ -49,3 +49,7 @@ for (i in 1:nrow(matches)) {
     index <- index + 1
   }
 }
+
+team_name
+championships <- table(ifelse(world_cup$Champion == "West Germany", "Germany", world_cup$Champion))
+championships
