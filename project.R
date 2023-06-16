@@ -77,3 +77,36 @@ matches$Away_Team_Champions <- ifelse(matches$away_team %in% names(championships
                                        championships[matches$away_team], 
                                        0)
 
+# This R script adds a Winner column to matches, determines match outcomes (draw, home win, away win), 
+# and then counts each outcome's frequency.
+matches$Winner <- "-"
+calculate_winner <- function(matches) {
+  home_team_goal <- as.integer(matches$home_score)
+  away_team_goal <- as.integer(matches$away_score)
+  matches$Winner <- ifelse(home_team_goal == away_team_goal, 0, ifelse(home_team_goal > away_team_goal, 1, 2))
+  
+  return(matches)
+}
+matches <- calculate_winner(matches)
+table(matches$Winner)
+
+#This R script replaces team names in the `matches` dataset, trims unnecessary columns,
+# pulls specific ranking data from the `fifa_ranking_2022.10.06` dataset,
+#adds new rank columns to `matches`, and replaces any NA values in championship columns with zeros.
+replace_team_name <- function(matches) {
+  matches$home_team <- team_name[matches$home_team]
+  matches$away_team <- team_name[matches$away_team]
+  return(matches)
+}
+
+matches <- replace_team_name(matches)
+
+matches <- matches[, -c(5, 8, 9, 10, 11, 12, 13)]
+matches <- matches[, -c(3,4)]
+rank<- fifa_ranking_2022.10.06[, c(1,4)]
+
+matches$Home_Team_rank <- 0
+matches$Away_Team_rank <- 0
+
+matches$Away_Team_Champions <- ifelse(is.na(matches$Away_Team_Champions), 0, matches$Away_Team_Champions)
+matches$Home_Team_Champions <- ifelse(is.na(matches$Home_Team_Champions), 0, matches$Home_Team_Champions)
