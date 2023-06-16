@@ -53,3 +53,26 @@ for (i in 1:nrow(matches)) {
 team_name
 championships <- table(ifelse(world_cup$Champion == "West Germany", "Germany", world_cup$Champion))
 championships
+
+# Chart #1
+# It makes a bar chart showing how many World Cup Championships each country has won. The chart is neat and clean with blue bars.
+# It tries to add information about the number of championships won by home and away teams in a dataset named matches.
+ggplot(world_cup, aes(x = Champion)) +
+  geom_bar(fill = "steelblue") +
+  labs(x = "Country", y = "Number of World Cup Championships") +
+  ggtitle("Number of World Cup Championships by Country") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+matches$Home_Team_Champions <- 0
+matches$Away_Team_Champions <- 0
+
+
+if (!is.null(championships[matches$home_team])) {
+  matches$Home_Team_Champions <- championships[matches$home_team]
+}
+
+if (!is.null(championships[matches$away_team])) {
+  matches$Away_Team_Champions <- championships[matches$away_team]
+}
