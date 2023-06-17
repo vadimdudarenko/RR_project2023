@@ -18,7 +18,6 @@ world_cup <- read.csv("world_cup.csv")
 matches <- matches_1930_2022[, -c(9, 10, 11, 12, 14,15,18,19,20,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45)]
 
 
-
 replace_teams <- function(matches) {
   matches$home_team[matches$home_team %in% c("German DR", "Germany FR")] <- "Germany"
   matches$home_team[matches$home_team == "Soviet Union"] <- "Russia"
@@ -102,11 +101,6 @@ replace_team_name <- function(matches) {
 matches <- replace_team_name(matches)
 
 matches <- matches[, -c(5, 8, 9, 10, 11, 12, 13)]
-matches <- matches[, -c(3,4)]
-rank<- fifa_ranking_2022.10.06[, c(1,4)]
-
-matches$Home_Team_rank <- 0
-matches$Away_Team_rank <- 0
 
 matches$Away_Team_Champions <- ifelse(is.na(matches$Away_Team_Champions), 0, matches$Away_Team_Champions)
 matches$Home_Team_Champions <- ifelse(is.na(matches$Home_Team_Champions), 0, matches$Home_Team_Champions)
@@ -118,11 +112,6 @@ matches$Home_Team_Champions <- ifelse(is.na(matches$Home_Team_Champions), 0, mat
 # 'away_xg' columns by replacing them with the mean values of their respective columns. 
 # Finally, the data is split into a training set and a test set, with approximately 70% of the data used for training and 30% used for testing.
 
-# Define the target variable
-Y <- matches$Winner
-
-# Define predictor variables, excluding specific columns
-X <- matches[, -c(4,6,9)]
 
 # Convert champion columns to numeric
 matches$Home_Team_Champions <- as.numeric(matches$Home_Team_Champions)
