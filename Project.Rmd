@@ -7,25 +7,25 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Project Description
 - This project is aimed at using machine learning to predict the outcomes of football matches. More specifically, it uses the Support Vector Machines (SVM) model to determine the winning team. The project has been jointly undertaken by Ismayil, Vadym, and Ivan.
-- This project was undertaken as a part of an academic task that required the translation of statistical analysis from one programming language to another. The original study, conducted in Python, was translated into R, and the analysis was reproduced. The process offered us an opportunity to understand the nuances of different programming languages and how the same task can be executed differently in each.
+- This project was undertaken as a part of an academic task that required the translation of statistical analysis from one programming language to another. The original study, conducted in Python, was translated into R, and the analysis was reproduced. The process offered us an opportunity to understand the nuances of different programming languages and how the same task can be executed differently in each.<br>
 
 ## Data Acquisition and Preparation
 - The data for this project comes from two CSV files: matches_1930_2022.csv and world_cup.csv. The first file contains data on soccer matches from 1930 through 2022, while the second one provides information on World Cup matches.
 - In the data preparation phase, unneeded columns from the matches dataset are dropped, focusing on essential match details such as home team, away team, and scores. Teams' names are replaced with appropriate names where necessary. A numeric index is assigned to each unique team name for more manageable data processing.
 - Next, the championships won by each team are counted, and new columns, Home_Team_Champions and Away_Team_Champions, are added to the matches dataset, indicating how many times the home and away teams have won championships, respectively.
-- The winning team for each match is calculated and added to the dataset as the column Winner.
+- The winning team for each match is calculated and added to the dataset as the column Winner.<br>
 
 ## Data Analysis
 - After data preparation, the dataset is visualized to see the distribution of World Cup championships by country. Next, teams' names are replaced with their corresponding numeric indices. Finally, missing values are replaced with appropriate values.
-- The dataset is then split into training and test sets, with 70% of the data used for training the SVM model and 30% used for testing it.
+- The dataset is then split into training and test sets, with 70% of the data used for training the SVM model and 30% used for testing it.<br>
 
 ## Modeling
-- A Support Vector Machines (SVM) model is used to predict match outcomes. The model is trained on the Winner attribute with other columns as features.
+- A Support Vector Machines (SVM) model is used to predict match outcomes. The model is trained on the Winner attribute with other columns as features.<br>
 
 ## Model Evaluation
 - The model's predictions on both training and test data are computed, and the accuracy of the model is determined by comparing the model's predictions to the actual results. A confusion matrix is generated using the caret package's confusionMatrix() function to provide a detailed evaluation of the model's performance.
 - The model's performance is visualized, and a comparison between the predicted and actual results is made. This helps in understanding how well the model has performed in predicting the outcomes of the matches.
-- In conclusion, the project demonstrates how machine learning can be applied in the domain of sports analytics to predict soccer match outcomes using SVM.
+- In conclusion, the project demonstrates how machine learning can be applied in the domain of sports analytics to predict soccer match outcomes using SVM.<br>
 
 ```{r, message=FALSE}
 library(e1071)
@@ -36,7 +36,7 @@ library(ggplot2)
 ```
 
 
-*Loading data*
+*Loading data*<br>
 ```{r}
 matches_1930_2022 <- read.csv("matches_1930_2022.csv")
 ```
@@ -46,7 +46,7 @@ matches_1930_2022 <- read.csv("matches_1930_2022.csv")
 world_cup <- read.csv("world_cup.csv")
 ```
 
-*Data Preparation*
+*Data Preparation*<br>
 First we remove unnecessary columns from the matches data, then activate function replace_teams.
 ```{r}
 matches <- matches_1930_2022[, -c(9, 10, 11, 12, 14,15,18,19,20,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45)]
@@ -67,7 +67,7 @@ replace_teams <- function(matches) {
 matches <- replace_teams(matches)
 ```
 
-*Create a dictionary of football team*
+*Create a dictionary of football team*<br>
 We create an empty list to store tem names, then initialize an index for team names. After that we print the dictionary of football team names.
 ```{r}
 team_name <- list()
@@ -91,14 +91,14 @@ team_name
 ```
 
 
-*Print the number of World Cup championships by country*
+*Print the number of World Cup championships by country*<br>
 ```{r}
 championships <- table(ifelse(world_cup$Champion == "West Germany", "Germany", world_cup$Champion))
 championships
 ```
 
 
-*Create a countplot*
+*Create a countplot*<br>
 ```{r}
 ggplot(world_cup, aes(x = Champion)) +
   geom_bar(fill = "steelblue") +
@@ -110,7 +110,7 @@ ggplot(world_cup, aes(x = Champion)) +
 
 
 
-*Set the initual values of "Home_Team_Champions" and "Away_Team_Champions" columns in the "matches" dataset to 0 *
+*Set the initual values of "Home_Team_Champions" and "Away_Team_Champions" columns in the "matches" dataset to 0 *<br>
 ```{r}
 matches$Home_Team_Champions <- 0
 matches$Away_Team_Champions <- 0
@@ -126,7 +126,7 @@ if (!is.null(championships[matches$away_team])) {
 
 ```
 
-*Create a new column named "Winner" in the "matches" dataset and initialize all values as "-", then define function "calculate winner" to determine the winner based on goal scores. After that update "matches" dataset with winnerinformation.*
+*Create a new column named "Winner" in the "matches" dataset and initialize all values as "-", then define function "calculate winner" to determine the winner based on goal scores. After that update "matches" dataset with winnerinformation.*<br>
 ```{r}
 matches$Winner <- "-"
 
@@ -143,7 +143,7 @@ matches <- calculate_winner(matches)
 table(matches$Winner)
 ```
 
-*Define function "replace_team_name" to replace team names in "matches" dataset. Update "matches" dataset with replaced team names".*
+*Define function "replace_team_name" to replace team names in "matches" dataset. Update "matches" dataset with replaced team names".*<br>
 ```{r}
 replace_team_name <- function(matches) {
   matches$home_team <- team_name[matches$home_team]
@@ -154,7 +154,7 @@ replace_team_name <- function(matches) {
 matches <- replace_team_name(matches)
 ```
 
-*Remove unnecessary columns from "matches" dataset. Replace NA values with 0.*
+*Remove unnecessary columns from "matches" dataset. Replace NA values with 0.*<br>
 ```{r}
 matches <- matches[, -c(5, 8, 9, 10, 11, 12, 13)]
 matches <- matches[, -c(3,4,5,6)]
@@ -164,7 +164,7 @@ matches$Away_Team_Champions <- ifelse(is.na(matches$Away_Team_Champions), 0, mat
 matches$Home_Team_Champions <- ifelse(is.na(matches$Home_Team_Champions), 0, matches$Home_Team_Champions)
 
 ```
-*Unlist the dataset*
+*Unlist the dataset*<br>
 Then convert data types and unlist columns in "matches" dataset.
 ```{r}
 class(matches)
@@ -179,14 +179,14 @@ matches$home_team <- unlist(matches$home_team)
 #mean_value1 <- mean(matches$away_xg, na.rm = TRUE)
 #matches$away_xg <- ifelse(is.na(matches$away_xg), mean_value1, matches$away_xg)
 ```
-*Create indices for the training and test sets*
+*Create indices for the training and test sets*<br>
 ```{r}
 # Create indices for the training and test sets
 sample <- sample(c(TRUE, FALSE), nrow(matches), replace=TRUE, prob=c(0.7,0.3))
 train <- matches[sample, ]
 test <- matches[!sample, ]  
 ```
-*Build an SVM model for classification using the training data*
+*Build an SVM model for classification using the training data*<br>
 ```{r}
 
 model <- svm(Winner ~.,
@@ -198,39 +198,39 @@ model
 ```
 
 
-*Make predictions in the test data using the trained data. Print the predicted values*
+*Make predictions in the test data using the trained data. Print the predicted values*<br>
 ```{r}
 pred_test <- predict(model,newdata = test)
 pred_test
 ```
-*Make predictions on the training data using the train model and store the results, then calculate the accuracy of the model on the training data by comparing the predictions with the actual values.*
+*Make predictions on the training data using the train model and store the results, then calculate the accuracy of the model on the training data by comparing the predictions with the actual values.*<br>
 ```{r}
 pred_train1 <- predict(model, train)
 mean(pred_train1 == train$Winner)
 ```
 
-*Make predictions on the test data using the trained model and store the results in "pred_test", then calculate the accuracy of the model on the training data by comparing the predictions with the actual values (test$Winner).*
+*Make predictions on the test data using the trained model and store the results in "pred_test", then calculate the accuracy of the model on the training data by comparing the predictions with the actual values (test$Winner).*<br>
 ```{r}
 pred_test <- predict(model, test)
 mean(pred_test == test$Winner)
 ```
 
-*Create a data frame named results containing the actual and predicted values from the test data.*
+*Create a data frame named results containing the actual and predicted values from the test data.*<br>
 ```{r}
 results <- data.frame(Actual = test$Winner, Predicted = pred_test)
 ```
 
-*Use the caret package's confusionMatrix() function to calculate evaluation metrics.*
+*Use the caret package's confusionMatrix() function to calculate evaluation metrics.*<br>
 ```{r}
 # Use the caret package's confusionMatrix() function to calculate evaluation metrics
 cm <- confusionMatrix(data = factor(results$Predicted),
                       reference = factor(results$Actual))
 ```
 
-*Print the classification report, which includes evaluation metrics calculated using the confusion matrix.*
+*Print the classification report, which includes evaluation metrics calculated using the confusion matrix.*<br>
 ```{r}
 print(cm)
 ```
 
-#### In conclusion, the SVM model trained on the provided dataset achieved an accuracy of 0.55 in predicting the outcomes of football matches.  This project showcased the importance of reproducible research practices, ensuring transparency and enabling others to validate and build upon the results. By sharing the code and data, the findings can be easily replicated and further contribute to the field of sports analytics.*
+<br><br>#### In conclusion, the SVM model trained on the provided dataset achieved an accuracy of 0.55 in predicting the outcomes of football matches.  This project showcased the importance of reproducible research practices, ensuring transparency and enabling others to validate and build upon the results. By sharing the code and data, the findings can be easily replicated and further contribute to the field of sports analytics.*
 
