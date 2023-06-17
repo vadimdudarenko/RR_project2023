@@ -131,3 +131,34 @@ matches$home_team <- unlist(matches$home_team)
 sample <- sample(c(TRUE, FALSE), nrow(matches), replace=TRUE, prob=c(0.7,0.3))
 train <- matches[sample, ]
 test <- matches[!sample, ]  
+
+
+
+####modeling 
+model <- svm(Winner ~.,
+                 data = train,
+                 type = 'C-classification',
+                 kernel = 'linear',
+                scale = FALSE)
+model
+
+pred_test <- predict(model,newdata = test)
+pred_test
+
+####evaluation
+pred_train1 <- predict(model, train)
+mean(pred_train1 == train$Winner)
+
+pred_test <- predict(model, test)
+mean(pred_test == test$Winner)
+
+
+# Create a data frame with the true and predicted labels
+results <- data.frame(Actual = test$Winner, Predicted = pred_test)
+
+# Use the caret package's confusionMatrix() function to calculate evaluation metrics
+cm <- confusionMatrix(data = factor(results$Predicted),
+                      reference = factor(results$Actual))
+
+# Print the classification report
+print(cm)
