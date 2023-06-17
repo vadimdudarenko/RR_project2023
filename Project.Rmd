@@ -5,13 +5,6 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-# *Project Description: Reproducible Research for FIFA World Cup Analysis in R*
-
-### The goal of this project is to perform an analysis of FIFA World Cup data using the R programming language, with a focus on reproducible research. The dataset used for this analysis is sourced from Kaggle and specifically the FIFA Football World Cup dataset, which can be found at the following link: FIFA Football World Cup Dataset.
-
-### The main objective of the project is to convert the existing code written in Python to R, allowing for a comprehensive and reproducible analysis of the FIFA World Cup data. The dataset contains information about matches, teams, goals, and other relevant variables from different World Cup tournaments.
-
-
 # Project Description
 - This project is aimed at using machine learning to predict the outcomes of football matches. More specifically, it uses the Support Vector Machines (SVM) model to determine the winning team. The project has been jointly undertaken by Ismayil, Vadym, and Ivan.
 - This project was undertaken as a part of an academic task that required the translation of statistical analysis from one programming language to another. The original study, conducted in Python, was translated into R, and the analysis was reproduced. The process offered us an opportunity to understand the nuances of different programming languages and how the same task can be executed differently in each.
