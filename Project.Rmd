@@ -1,1 +1,65 @@
-R Markdown
+---
+title: "SVM Model for Predicting Soccer Match Winners"
+author: "Ismayil, Vadym, Ivan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+## Install and Load Necessary Packages
+### List of packages required
+packages <- c("e1071", "caret", "dplyr", "tidyverse", "ggplot2")
+
+### Install packages (if not already installed)
+lapply(packages, function(x) {
+  if (!require(x, character.only = TRUE)) {
+    install.packages(x)
+  }
+})
+
+### Load packages into R environment
+lapply(packages, library, character.only = TRUE)
+
+# Load Data
+matches_1930_2022 <- read.csv("matches_1930_2022.csv")
+world_cup <- read.csv("world_cup.csv")
+
+# Data Preparation
+matches <- matches_1930_2022[, -c(9, 10, 11, 12, 14,15,18,19,20,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45)]
+matches <- matches_1930_2022[, -c(9, 10, 11, 12, 14,15,18,19,20,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45)]
+
+replace_teams <- function(matches) {
+  matches$home_team[matches$home_team %in% c("German DR", "Germany FR")] <- "Germany"
+  matches$home_team[matches$home_team == "Soviet Union"] <- "Russia"
+  
+  matches$away_team[matches$away_team %in% c("German DR", "Germany FR")] <- "Germany"
+  matches$away_team[matches$away_team == "Soviet Union"] <- "Russia"
+  
+  return(matches)
+}
+
+#### Activate function replace_teams
+matches <- replace_teams(matches)
+
+team_name <- list()
+index <- 0
+
+for (i in 1:nrow(matches)) {
+  name <- matches[i, "home_team"]
+  if (!(name %in% names(team_name))) {
+    team_name[[name]] <- index
+    index <- index + 1
+  }
+  
+  name <- matches[i, "away_team"]
+  if (!(name %in% names(team_name))) {
+    team_name[[name]] <- index
+    index <- index + 1
+  }
+}
+
+team_name
+championships <- table(ifelse(world_cup$Champion == "West Germany", "Germany", world_cup$Champion))
+championships
