@@ -28,7 +28,6 @@ Vadym Dudarenko  Ivan Grakhovski  Ismayil Ismayilov
 - In conclusion, the project demonstrates how machine learning can be applied in the domain of sports analytics to predict soccer match outcomes using SVM.
 
 ```{r, message=FALSE}
-install.packages("e1071")
 library(e1071)
 library(caret)
 library(dplyr)
@@ -44,7 +43,7 @@ matches_1930_2022 <- read.csv("matches_1930_2022.csv")
 
 
 ```{r}
-world_cup <- read.csv("C:/Users/Vadym/Desktop/Reproducible/project/world_cup.csv")
+world_cup <- read.csv("world_cup.csv")
 ```
 
 *Data Preparation*
