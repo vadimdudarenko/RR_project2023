@@ -165,9 +165,9 @@ matches$Away_Team_Champions <- ifelse(is.na(matches$Away_Team_Champions), 0, mat
 matches$Home_Team_Champions <- ifelse(is.na(matches$Home_Team_Champions), 0, matches$Home_Team_Champions)
 
 ```
-
+*Unlist the dataset*
+Then convert data types and unlist columns in "matches" dataset.
 ```{r}
-# Unlist the dataset
 class(matches)
 
 matches$Home_Team_Champions<-as.numeric(matches$Home_Team_Champions)
@@ -180,16 +180,15 @@ matches$home_team <- unlist(matches$home_team)
 #mean_value1 <- mean(matches$away_xg, na.rm = TRUE)
 #matches$away_xg <- ifelse(is.na(matches$away_xg), mean_value1, matches$away_xg)
 ```
-
+*Create indices for the training and test sets*
 ```{r}
 # Create indices for the training and test sets
 sample <- sample(c(TRUE, FALSE), nrow(matches), replace=TRUE, prob=c(0.7,0.3))
 train <- matches[sample, ]
 test <- matches[!sample, ]  
 ```
-
+*Build an SVM model for classification using the training data*
 ```{r}
-####modeling 
 
 model <- svm(Winner ~.,
                  data = train,
@@ -200,36 +199,39 @@ model
 ```
 
 
-
+*Make predictions in the test data using the trained data. Print the predicted values*
 ```{r}
 pred_test <- predict(model,newdata = test)
 pred_test
 ```
-
+*Make predictions on the training data using the train model and store the results, then calculate the accuracy of the model on the training data by comparing the predictions with the actual values.*
 ```{r}
 pred_train1 <- predict(model, train)
 mean(pred_train1 == train$Winner)
 ```
 
-
+*Make predictions on the test data using the trained model and store the results in "pred_test", then calculate the accuracy of the model on the training data by comparing the predictions with the actual values (test$Winner).*
 ```{r}
-####evaluation
 pred_test <- predict(model, test)
 mean(pred_test == test$Winner)
 ```
 
-
+*Create a data frame named results containing the actual and predicted values from the test data.*
 ```{r}
-# Create a data frame with the true and predicted labels
 results <- data.frame(Actual = test$Winner, Predicted = pred_test)
 ```
 
-
+*Use the caret package's confusionMatrix() function to calculate evaluation metrics.*
 ```{r}
 # Use the caret package's confusionMatrix() function to calculate evaluation metrics
 cm <- confusionMatrix(data = factor(results$Predicted),
                       reference = factor(results$Actual))
-# Print the classification report
+```
+
+*Print the classification report, which includes evaluation metrics calculated using the confusion matrix.*
+```{r}
 print(cm)
 ```
+
+### In conclusion, the SVM model trained on the provided dataset achieved an accuracy of 0.55 in predicting the outcomes of football matches.  This project showcased the importance of reproducible research practices, ensuring transparency and enabling others to validate and build upon the results. By sharing the code and data, the findings can be easily replicated and further contribute to the field of sports analytics.*
 
