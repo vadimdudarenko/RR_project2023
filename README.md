@@ -6,16 +6,13 @@ Completed for the Reproducible research at the University of Warsaw, Faculty of 
 - Vadym Dudarenko (444820)
 - Ivan Grakhovski (444422)
 
-https://github.com/imajeetyadav/FIFA-WORLD-CUP-MATCH-DATA-ANALYSIS/blob/master/Project.ipynb
-
 ---
 
 # Project Description
-- This project is aimed at using machine learning to predict the outcomes of football matches. More specifically, it uses the Support Vector Machines (SVM) model to determine the winning team. The project has been jointly undertaken by Ismayil, Vadym, and Ivan.
-- This project was undertaken as a part of an academic task that required the translation of statistical analysis from one programming language to another. The original study, conducted in Python, was translated into R, and the analysis was reproduced. The process offered us an opportunity to understand the nuances of different programming languages and how the same task can be executed differently in each.
+- This project was undertaken as a part of an academic task that required the translation of statistical analysis from one programming language to another. The original study, conducted in Python[1], was translated into R, and the analysis was reproduced. The process offered us an opportunity to understand the nuances of different programming languages and how the same task can be executed differently in each.
 
 ## Data Acquisition and Preparation
-- The data for this project comes from two CSV files: matches_1930_2022.csv and world_cup.csv. The first file contains data on soccer matches from 1930 through 2022, while the second one provides information on World Cup matches.
+- The data for this project comes from two CSV files: matches_1930_2022.csv and world_cup.csv[2]. The first file contains data on soccer matches from 1930 through 2022, while the second one provides information on World Cup matches.
 - In the data preparation phase, unneeded columns from the matches dataset are dropped, focusing on essential match details such as home team, away team, and scores. Teams' names are replaced with appropriate names where necessary. A numeric index is assigned to each unique team name for more manageable data processing.
 - Next, the championships won by each team are counted, and new columns, Home_Team_Champions and Away_Team_Champions, are added to the matches dataset, indicating how many times the home and away teams have won championships, respectively.
 - The winning team for each match is calculated and added to the dataset as the column Winner.
@@ -31,3 +28,7 @@ https://github.com/imajeetyadav/FIFA-WORLD-CUP-MATCH-DATA-ANALYSIS/blob/master/P
 - The model's predictions on both training and test data are computed, and the accuracy of the model is determined by comparing the model's predictions to the actual results. A confusion matrix is generated using the caret package's confusionMatrix() function to provide a detailed evaluation of the model's performance.
 - The model's performance is visualized, and a comparison between the predicted and actual results is made. This helps in understanding how well the model has performed in predicting the outcomes of the matches.
 - In conclusion, the project demonstrates how machine learning can be applied in the domain of sports analytics to predict soccer match outcomes using SVM.
+
+## References
+1. https://www.kaggle.com/datasets/piterfm/fifa-football-world-cup?select=world_cup.csv
+2. https://github.com/imajeetyadav/FIFA-WORLD-CUP-MATCH-DATA-ANALYSIS/blob/master/Project.ipynb
