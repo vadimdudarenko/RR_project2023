@@ -1,9 +1,5 @@
----
-title: "SVM Model for Predicting Soccer Match Winners"
-author: "Ismayil, Vadym, Ivan"
-date: "`r Sys.Date()`"
-output: html_document
----
+# *Reproducible Research for FIFA World Cup Analysis in R*
+Vadym Dudarenko  Ivan Grakhovski  Insmyil Ismayilov
 
 # Project Description
 - This project is aimed at using machine learning to predict the outcomes of football matches. More specifically, it uses the Support Vector Machines (SVM) model to determine the winning team. The project has been jointly undertaken by Ismayil, Vadym, and Ivan.
