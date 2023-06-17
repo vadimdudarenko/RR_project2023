@@ -9,10 +9,10 @@ Completed for the Reproducible research at the University of Warsaw, Faculty of 
 ---
 
 # Project Description
-- This project was undertaken as a part of an academic task that required the translation of statistical analysis from one programming language to another. The original study, conducted in Python[1], was translated into R, and the analysis was reproduced. The process offered us an opportunity to understand the nuances of different programming languages and how the same task can be executed differently in each.
+- This project was undertaken as a part of an academic task that required the translation of statistical analysis from one programming language to another. The original study, conducted in Python (see Ref. #1), was translated into R, and the analysis was reproduced. The process offered us an opportunity to understand the nuances of different programming languages and how the same task can be executed differently in each.
 
 ## Data Acquisition and Preparation
-- The data for this project comes from two CSV files: matches_1930_2022.csv and world_cup.csv[2]. The first file contains data on soccer matches from 1930 through 2022, while the second one provides information on World Cup matches.
+- The data for this project comes from two CSV files: matches_1930_2022.csv and world_cup.csv(see Ref. #2). The first file contains data on soccer matches from 1930 through 2022, while the second one provides information on World Cup matches.
 - In the data preparation phase, unneeded columns from the matches dataset are dropped, focusing on essential match details such as home team, away team, and scores. Teams' names are replaced with appropriate names where necessary. A numeric index is assigned to each unique team name for more manageable data processing.
 - Next, the championships won by each team are counted, and new columns, Home_Team_Champions and Away_Team_Champions, are added to the matches dataset, indicating how many times the home and away teams have won championships, respectively.
 - The winning team for each match is calculated and added to the dataset as the column Winner.
