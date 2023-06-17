@@ -8,7 +8,8 @@ output: html_document
 
 
 ```{r}
-
+install.packages("e1071")
+library(e1071)
 library(caret)
 library(dplyr)
 library(tidyverse)
@@ -138,7 +139,7 @@ matches <- replace_team_name(matches)
 
 ```{r}
 matches <- matches[, -c(5, 8, 9, 10, 11, 12, 13)]
-matches <- matches[, -c(3,4)]
+matches <- matches[, -c(3,4,5,6)]
 
 
 matches$Away_Team_Champions <- ifelse(is.na(matches$Away_Team_Champions), 0, matches$Away_Team_Champions)
@@ -170,8 +171,6 @@ test <- matches[!sample, ]
 
 ```{r}
 ####modeling 
-install.packages("e1071")
-library(e1071)
 
 model <- svm(Winner ~.,
                  data = train,
@@ -184,26 +183,22 @@ model
 
 
 ```{r}
-pred_test1 <- predict(model,newdata = test)
-pred_test1
+pred_test <- predict(model,newdata = test)
+pred_test
 ```
 
 ```{r}
+pred_train1 <- predict(model, train)
+mean(pred_train1 == train$Winner)
+```
+
+
+```{r}
+####evaluation
 pred_test <- predict(model, test)
 mean(pred_test == test$Winner)
 ```
 
-```{r}
-confusion_matrix <- table(train$Winner, pred_train1)
-print(confusion_matrix)
-```
-
-
-```{r}
-accuracy <- sum(test$Winner == pred_test) / length(test$Winner)
-print(accuracy)
-
-```
 
 ```{r}
 # Create a data frame with the true and predicted labels
