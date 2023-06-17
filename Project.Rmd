@@ -68,7 +68,7 @@ matches <- replace_teams(matches)
 ```
 
 *Create a dictionary of football team*<br>
-We create an empty list to store tem names, then initialize an index for team names. After that we print the dictionary of football team names.
+We create an empty list to store tem names, then initialize an index for team names. After that we print the dictionary of football team names.<br>
 ```{r}
 team_name <- list()
 index <- 0
