@@ -232,5 +232,5 @@ cm <- confusionMatrix(data = factor(results$Predicted),
 print(cm)
 ```
 ####Conclusion
-In conclusion, the SVM model trained on the provided dataset achieved an accuracy of 0.55 in predicting the outcomes of football matches.  This project showcased the importance of reproducible research practices, ensuring transparency and enabling others to validate and build upon the results. By sharing the code and data, the findings can be easily replicated and further contribute to the field of sports analytics. It also shows a beeter perfomance comparable to the prevoius study where the accuarcy was 0.45 and the new updated datset was used.
+In conclusion, the SVM model trained on the provided dataset achieved an accuracy of 0.55 in predicting the outcomes of football matches. This project showcased the importance of reproducible research practices, ensuring transparency and enabling others to validate and build upon the results. By sharing the code and data, the findings can be easily replicated and further contribute to the field of sports analytics. It also shows a better perfomance comparable to the previous study where the accuarcy was 0.45 and the new updated datset was used.
 
