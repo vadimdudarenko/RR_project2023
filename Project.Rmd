@@ -3,7 +3,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # *Reproducible Research for FIFA World Cup Analysis in R*
-Vadym Dudarenko  Ivan Grakhovski  Ismayil Ismayilov
+*Vadym Dudarenko*<br>  *Ivan Grakhovski*<br>  *Ismayil Ismayilov*<br>
 
 # Project Description
 - This project is aimed at using machine learning to predict the outcomes of football matches. More specifically, it uses the Support Vector Machines (SVM) model to determine the winning team. The project has been jointly undertaken by Ismayil, Vadym, and Ivan.
