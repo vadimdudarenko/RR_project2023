@@ -122,10 +122,10 @@ matches$away_team <- unlist(matches$away_team)
 matches$home_team <- unlist(matches$home_team)
 
 # Replace NA values in home_xg and away_xg columns with mean values
-mean_value <- mean(matches$home_xg, na.rm = TRUE)
-matches$home_xg <- ifelse(is.na(matches$home_xg), mean_value, matches$home_xg)
-mean_value1 <- mean(matches$away_xg, na.rm = TRUE)
-matches$away_xg <- ifelse(is.na(matches$away_xg), mean_value1, matches$away_xg)
+#mean_value <- mean(matches$home_xg, na.rm = TRUE)
+#matches$home_xg <- ifelse(is.na(matches$home_xg), mean_value, matches$home_xg)
+#mean_value1 <- mean(matches$away_xg, na.rm = TRUE)
+#matches$away_xg <- ifelse(is.na(matches$away_xg), mean_value1, matches$away_xg)
 
 # Create training and test datasets with approximately 70% training, 30% test
 sample <- sample(c(TRUE, FALSE), nrow(matches), replace=TRUE, prob=c(0.7,0.3))
