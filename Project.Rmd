@@ -37,8 +37,8 @@ library(ggplot2)
 ```
 
 
+*Loading data*
 ```{r}
-# Load Data
 matches_1930_2022 <- read.csv("matches_1930_2022.csv")
 ```
 
@@ -47,9 +47,9 @@ matches_1930_2022 <- read.csv("matches_1930_2022.csv")
 world_cup <- read.csv("C:/Users/Vadym/Desktop/Reproducible/project/world_cup.csv")
 ```
 
-
+*Data Preparation*
+First we remove unnecessary columns from the matches data, then activate function replace_teams.
 ```{r}
-# Data Preparation
 matches <- matches_1930_2022[, -c(9, 10, 11, 12, 14,15,18,19,20,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45)]
 ```
 
@@ -65,11 +65,11 @@ replace_teams <- function(matches) {
   return(matches)
 }
 
-#### Activate function replace_teams
 matches <- replace_teams(matches)
 ```
 
-
+*Create a dictionary of football team*
+We create an empty list to store tem names, then initialize an index for team names. After that we print the dictionary of football team names.
 ```{r}
 team_name <- list()
 index <- 0
@@ -92,16 +92,15 @@ team_name
 ```
 
 
-
+*Print the number of World Cup championships by country*
 ```{r}
 championships <- table(ifelse(world_cup$Champion == "West Germany", "Germany", world_cup$Champion))
 championships
 ```
 
 
-
+*Create a countplot*
 ```{r}
-# Create a countplot
 ggplot(world_cup, aes(x = Champion)) +
   geom_bar(fill = "steelblue") +
   labs(x = "Country", y = "Number of World Cup Championships") +
@@ -112,7 +111,7 @@ ggplot(world_cup, aes(x = Champion)) +
 
 
 
-
+*Set the initual values of "Home_Team_Champions" and "Away_Team_Champions" columns in the "matches" dataset to 0 *
 ```{r}
 matches$Home_Team_Champions <- 0
 matches$Away_Team_Champions <- 0
@@ -128,7 +127,7 @@ if (!is.null(championships[matches$away_team])) {
 
 ```
 
-
+*Create a new column named "Winner" in the "matches" dataset and initialize all values as "-", then define function "calculate winner" to determine the winner based on goal scores. After that update "matches" dataset with winnerinformation.*
 ```{r}
 matches$Winner <- "-"
 
@@ -145,7 +144,7 @@ matches <- calculate_winner(matches)
 table(matches$Winner)
 ```
 
-
+*Define function "replace_team_name" to replace team names in "matches" dataset. Update "matches" dataset with replaced team names".*
 ```{r}
 replace_team_name <- function(matches) {
   matches$home_team <- team_name[matches$home_team]
@@ -156,7 +155,7 @@ replace_team_name <- function(matches) {
 matches <- replace_team_name(matches)
 ```
 
-
+*Remove unnecessary columns from "matches" dataset. Replace NA values with 0.*
 ```{r}
 matches <- matches[, -c(5, 8, 9, 10, 11, 12, 13)]
 matches <- matches[, -c(3,4,5,6)]
