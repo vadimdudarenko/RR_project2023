@@ -30,5 +30,6 @@ Completed for the Reproducible research at the University of Warsaw, Faculty of 
 - In conclusion, the project demonstrates how machine learning can be applied in the domain of sports analytics to predict soccer match outcomes using SVM.
 
 ## References
-1. https://www.kaggle.com/datasets/piterfm/fifa-football-world-cup?select=world_cup.csv
-2. https://github.com/imajeetyadav/FIFA-WORLD-CUP-MATCH-DATA-ANALYSIS/blob/master/Project.ipynb
+1. https://github.com/imajeetyadav/FIFA-WORLD-CUP-MATCH-DATA-ANALYSIS/blob/master/Project.ipynb
+2. https://www.kaggle.com/datasets/piterfm/fifa-football-world-cup?select=world_cup.csv
+
