@@ -27,7 +27,7 @@ output: html_document
 - The model's performance is visualized, and a comparison between the predicted and actual results is made. This helps in understanding how well the model has performed in predicting the outcomes of the matches.
 - In conclusion, the project demonstrates how machine learning can be applied in the domain of sports analytics to predict soccer match outcomes using SVM.
 
-```{r}
+```{r, message=FALSE}
 install.packages("e1071")
 library(e1071)
 library(caret)
