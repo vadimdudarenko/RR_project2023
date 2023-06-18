@@ -29,6 +29,9 @@ Completed for the Reproducible research at the University of Warsaw, Faculty of 
 - The model's performance is visualized, and a comparison between the predicted and actual results is made. This helps in understanding how well the model has performed in predicting the outcomes of the matches.
 - In conclusion, the project demonstrates how machine learning can be applied in the domain of sports analytics to predict soccer match outcomes using SVM.
 
+## Conclusion 
+During the project, we applied an updated dataset spanning from 1930 to 2022, surpassing the previous study's coverage from 1930 to 2014. By adopting a similar methodology, we were able to achieve higher accuracy in our results. However, the translation of the code from Python to R presented a few challenges stemming from disparities in syntax, data structures, function creation, data modeling, libraries, and  especially error handling mechanisms. Despite these obstacles, we successfully navigated the differences and accomplished our objectives.   
+ 
 ## References
 1. https://github.com/imajeetyadav/FIFA-WORLD-CUP-MATCH-DATA-ANALYSIS/blob/master/Project.ipynb
 2. https://www.kaggle.com/datasets/piterfm/fifa-football-world-cup?select=world_cup.csv
